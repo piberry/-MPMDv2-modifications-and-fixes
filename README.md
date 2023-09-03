@@ -1,4 +1,4 @@
-## *** Updated in september 2023 with [proper dumps and some addiditional information](https://github.com/piberry/-MPMDv2-modifications-and-fixes/tree/d60b4e79180a0780111216217c25c4c76c4d543e/proper_dumps). The original mpmdv2esp32.bin is kept for reference but has no use as it is 8MB large while the ESP32 flash is 4MB ***  
+## *** Updated in september 2023 with [proper dumps and some additional information](https://github.com/piberry/-MPMDv2-modifications-and-fixes/tree/d60b4e79180a0780111216217c25c4c76c4d543e/proper_dumps). The original mpmdv2esp32.bin is kept for reference but has no use as it is 8MB large while the ESP32 flash is 4MB ***  
 
 # -MPMDv2-modifications-and-fixes
  MPMDv2 modifications and fixes
