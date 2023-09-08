@@ -1,6 +1,8 @@
 # Start here if you want to do the whole process from scratch.  
-### Start at step 3 to dump your own factory_app partition.  
-### Start at step 5 to flash the factory_app partition.  
+### Go to step 1.1 to dump the complete flash.  
+### Go to step 1.2 if your board is bricked and you just want to recover.
+### Go to step 3 to dump your factory_app partition.  
+### Go to step 5 to flash the factory_app partition.  
 
 ### Prerequisite  
 Mandatory:  
@@ -14,7 +16,7 @@ Install the latest version of python.
 Install [esp32_image_parser](https://github.com/piberry/esp32_image_parser).   
 It´s crucial to use the fork by samyk with support for non-DMA DRAM data.  
 
-1.Dump flash of the ESP32 WROOM 32E chip with esptool*:  
+1.1 Dump flash of the ESP32 WROOM 32E chip with esptool*:  
 esptool.exe --chip esp32 --port COM8 --baud 115200 read_flash 0 0x400000 mpmdv2esp32_v1_4_2.bin  
 esptool.py 4.6.2  
 Serial port COM8  
@@ -30,7 +32,11 @@ Stub running...
 4194304 (100 %)  
 Read 4194304 bytes at 0x0 in 380.5 seconds (88.2 kbit/s)...  
 
-If your file is not 4MB large, there´s something wrong.  
+1.2 Flash a full dump back to the chip*:  
+If you just need to recover, use the mpmdv2esp32_v1_5.bin that i supplied and flash it.  
+esptool.exe --chip esp32 --port COM8 --baud 115200 write_flash 0x400000 mpmdv2esp32_v1_5.bin  
+
+If your dump file is not 4MB large, there´s something wrong.  
 The created dump can be used to flash another board but be aware that it contains the serial number/MAC address and wifi credentials of the donor board and this will overwrite your own data.  
 It can be altered with a hex editor easily, you could also insert your own data.  
 If you are satisfied with the method, your done.  
