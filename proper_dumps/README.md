@@ -8,7 +8,7 @@
 Mandatory:  
 Solder a pin header to the ESP32LCD board as seen [here](https://github.com/piberry/-MPMDv2-modifications-and-fixes/blob/ff6dc8617a9fa8b2c46c69943a134510c10867a0/pics/20220801_200219.jpg).  
 You need a FTDI or similar device to read/write to the chip. I used a BTT Writer V1.0.  
-Use the information from the original [HowTo_unbricking_4U.md](https://github.com/piberry/-MPMDv2-modifications-and-fixes/blob/ff6dc8617a9fa8b2c46c69943a134510c10867a0/HowTo_unbricking_4U.md) document to wire the FTDI to the pin header on the board.
+Use the information from the original [HowTo_unbricking_4U.md](https://github.com/piberry/-MPMDv2-modifications-and-fixes/blob/ff6dc8617a9fa8b2c46c69943a134510c10867a0/HowTo_unbricking_4U.md) document to wire the FTDI to the pin header on the board.  
 Download esptool.exe.  
 Optional:  
 Get a hex editor.  
@@ -16,7 +16,7 @@ Install the latest version of python.
 Install [esp32_image_parser](https://github.com/piberry/esp32_image_parser).   
 It´s crucial to use the fork by samyk with support for non-DMA DRAM data.  
 
-1.1 Dump flash of the ESP32 WROOM 32E chip with esptool*:  
+1.1.Dump flash of the ESP32 WROOM 32E chip with esptool*:  
 esptool.exe --chip esp32 --port COM8 --baud 115200 read_flash 0 0x400000 mpmdv2esp32_v1_4_2.bin  
 esptool.py 4.6.2  
 Serial port COM8  
@@ -32,16 +32,15 @@ Stub running...
 4194304 (100 %)  
 Read 4194304 bytes at 0x0 in 380.5 seconds (88.2 kbit/s)...  
 
-1.2 Flash a full dump back to the chip*:  
-If you just need to recover, use the mpmdv2esp32_v1_5.bin that i supplied and flash it.  
-esptool.exe --chip esp32 --port COM8 --baud 115200 write_flash 0x400000 mpmdv2esp32_v1_5.bin  
-
 If your dump file is not 4MB large, there´s something wrong.  
 The created dump can be used to flash another board but be aware that it contains the serial number/MAC address and wifi credentials of the donor board and this will overwrite your own data.  
 It can be altered with a hex editor easily, you could also insert your own data.  
-If you are satisfied with the method, your done.  
 
-A better way that preserves your own data is to only read/write the main firmware partition.  
+1.2.Flash a full dump back to the chip*:  
+If you just need to recover, use the mpmdv2esp32_v1_5.bin that i supplied and flash it.  
+esptool.exe --chip esp32 --port COM8 --baud 115200 write_flash mpmdv2esp32_v1_5.bin  
+
+If your board isn´t bricked but you aren´t able to update the LCD firmware the regular way, a better way that preserves your own data is to only read/write the main firmware partition.  
 Here´s how to do it. Since the offset and lenght of the factory_app partition is shown next under entry 3, you may directly jump to step 3 or step 5.
 
 2.Use esp32_image_parser to get the partition table of the dump:  
